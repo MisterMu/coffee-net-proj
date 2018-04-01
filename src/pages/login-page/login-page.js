@@ -1,5 +1,7 @@
 import React from 'react';
-import { LoginForm, RegisterForm } from '../../components';
+import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
+import { LoginForm, RegisterForm, MainMenu } from '../../components';
 
 import './login-page.scss';
 
@@ -19,13 +21,22 @@ export class LoginPage extends React.Component {
 
   render () {
     return (
-      <div className="host">
-        <div className="login-card">
-          <LoginForm />
-          <div className="divider">
-            <b>OR</b>
+      <div>
+        <MainMenu>
+          <Link to="/account"><Icon type="user" /> Account </Link>
+          <Link to="/wishlist"><Icon type="star-o" /> Wishlist </Link>
+          <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
+          <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
+          <Link to="/login"><Icon type="login" /> Login </Link>
+        </MainMenu>
+        <div className="host">
+          <div className="login-card">
+            <LoginForm />
+            <div className="divider">
+              <b>OR</b>
+            </div>
+            <RegisterForm />
           </div>
-          <RegisterForm />
         </div>
       </div>
     );
