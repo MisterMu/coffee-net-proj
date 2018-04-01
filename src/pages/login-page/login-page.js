@@ -1,5 +1,4 @@
 import React from 'react';
-import { Divider } from 'antd';
 import { LoginForm, RegisterForm } from '../../components';
 
 import './login-page.scss';

@@ -1,13 +1,14 @@
 .host {
+  position: relative;
   .login-card {
     padding: 20px;
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     position: absolute;
-    top: 0;
+    top: 36px;
     left: 50%;
-    transform: translate(-50%, 30%);
+    transform: translate(-50%, 0);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
   }
