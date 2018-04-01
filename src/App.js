@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { Button, DatePicker } from 'antd';
-import logo from './logo.svg';
-import './App.css';
+import { Link } from 'react-router-dom';
+import MainRouter from './routers/main-router';
 
 class App extends Component {
+  constructor (props) {
+    super (props);
+    this.state = {
+      ready: true
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button type="primary">Test</Button>
-        <DatePicker/>
+      <div>
+        <ul>
+          <li><Link to="/">Root</Link></li>
+          <li><Link to="/test">Test Router</Link></li>
+          <li><Link to="/login">Log in</Link></li>
+        </ul>
+        <p>App content</p>
+        <MainRouter />
       </div>
     );
   }
