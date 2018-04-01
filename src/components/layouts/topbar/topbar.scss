@@ -1,0 +1,24 @@
+.topbar {
+  background-color: #F0F0EA;
+  padding-left: 72px;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    li {
+      float: left;
+      a {
+        display: block;
+        color: rgba(0, 0, 0, 0.55);
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+        font-size: 0.9em;
+      }
+      &:hover {
+        background-color: hsl(60, 4%, 88%);
+      }
+    }
+  }
+}

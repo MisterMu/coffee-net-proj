@@ -1,0 +1,28 @@
+.main-menu {
+  .menu-content {
+    display: flex;
+    justify-content: space-between;
+    .logo {
+      margin-top: 16px;
+      width: 120px;
+      height: 120px;
+      background-color: red;
+    }
+    .menu {
+      margin-top: 16px;
+      a {
+        color: rgba(0, 0, 0, 0.55);
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+        font-size: 0.9em;
+        &:hover {
+          color: #F09D3B;
+        }
+      }
+    }
+  }
+  .ant-divider {
+    margin-top: 16px;
+  }
+}
