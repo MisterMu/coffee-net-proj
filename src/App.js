@@ -17,14 +17,6 @@ class App extends Component {
       <div>
         <Topbar />
         <div style={{paddingLeft: 72, paddingRight: 72}}>
-          <MainMenu>
-            <Link to="/account"><Icon type="user" /> Account </Link>
-            <Link to="/wishlist"><Icon type="star-o" /> Wishlist </Link>
-            <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
-            <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
-            <Link to="/login"><Icon type="login" /> Login </Link>
-          </MainMenu>
-          <p>App content</p>
           <MainRouter />
         </div>
       </div>
