@@ -1,18 +1,30 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { LoginPage } from '../pages';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { LoginPage, MainPage } from '../pages';
 
-const test = () => (
-  <div>
-    <h2>Main Router Work!!</h2>
-  </div>
+const testParam = ({match}) => {
+  return (
+    <div>
+      <h2>{match.params.id}</h2>
+    </div>
+  );
+};
+
+const redirect = () => (
+  <Redirect to="/" />
 );
 
 const MainRouter = () => (
-  <div>
-    <Route path="/test" component={test} />
+  <Switch>
+    <Route exact path="/" component={MainPage} />
+    <Route path="/account" component={null} />
+    <Route path="/wishlist" component={null} />
+    <Route path="/checkout" component={null} />
+    <Route path="/cart" component={null} />
     <Route path="/login" component={LoginPage} />
-  </div>
+    <Route path="/store/:id" component={testParam} />
+    <Route component={redirect} />
+  </Switch>
 );
 
 export default MainRouter;
