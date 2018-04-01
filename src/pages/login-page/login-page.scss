@@ -1,0 +1,40 @@
+.host {
+  .login-card {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 30%);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+  }
+
+  .divider {
+    &::before {
+      content: "";
+      display: block;
+      height: 45%;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.15);
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-bottom: 5px;
+    }
+    &::after {
+      content: "";
+      display: block;
+      height: 45%;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.15);
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-top: 5px;
+    }
+    width: 80px;
+    text-align: center;
+  }
+}
+
