@@ -3,6 +3,7 @@ import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import MainRouter from './routers/main-router';
 import { Topbar, MainMenu } from './components/layouts/';
+import {ShopPage} from './pages/shop-page/shop-page.js'
 
 class App extends Component {
   constructor (props) {
@@ -17,7 +18,8 @@ class App extends Component {
       <div>
         <Topbar />
         <div style={{paddingLeft: 72, paddingRight: 72}}>
-          <MainRouter />
+          {/* <MainRouter /> */}
+          <ShopPage />
         </div>
       </div>
     );
