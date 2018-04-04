@@ -2,13 +2,18 @@ import React from 'react';
 import { Divider } from 'antd';
 
 import './item-group.scss';
+import { ItemBox } from '..';
 
 export class ItemGroup extends React.Component {
   render() {
     let tmp = [];
     if (this.props.data) {
       tmp = this.props.data.map((item) => {
-        return <div className="box" />
+        return (
+          <div className="box" >
+            <ItemBox data={item} />
+          </div>
+        );
       });
     } else {
       tmp = null;

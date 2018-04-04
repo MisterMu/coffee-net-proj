@@ -9,12 +9,20 @@ export class MainPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      data: [1, 2, 3, 4, 5]
+      data: []
     }
   }
 
   componentDidMount () {
     // get data from api
+    let tmp = [1, 2, 3, 4, 5].map((i) => {
+      return {
+        id: '00' + i,
+        name: 'product ' + i,
+        price: '200 Baht'
+      }
+    });
+    this.setState({ data: tmp });
   }
 
   render () {
