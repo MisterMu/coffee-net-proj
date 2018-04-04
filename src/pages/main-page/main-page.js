@@ -1,15 +1,25 @@
 import React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { MainMenu } from '../../components/layouts';
+import { MainMenu, ItemGroup } from '../../components/layouts';
 
 import './main-page.scss';
-import { CategorySideMenu, OtherSideMenu } from '../../components';
 
 export class MainPage extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      data: [1, 2, 3, 4, 5]
+    }
+  }
+
+  componentDidMount () {
+    // get data from api
+  }
+
   render () {
     return (
-      <div className="host">
+      <div className="main-page">
         <MainMenu>
           <Link to="/account"><Icon type="user" /> Account </Link>
           <Link to="/wishlist"><Icon type="star-o" /> Wishlist </Link>
@@ -20,8 +30,7 @@ export class MainPage extends React.Component {
         <div className="banner-img">
           BANNER
         </div>
-        <CategorySideMenu />
-        <OtherSideMenu />
+        <ItemGroup data={this.state.data} />
       </div>
     );
   }
