@@ -1,0 +1,50 @@
+.item-box{
+    .product-image-wrapper{
+    	border:1px solid #F7F7F5;
+        overflow: hidden;
+        margin-bottom:30px;
+        width: 255px;
+       //margin: auto;
+    }
+
+    .single-products {
+       position: relative;
+     }
+
+    .productinfo p{
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #696763;
+    }
+    
+    .productinfo img{
+        width: 100%;
+    }
+    
+    .productinfo{
+    position:relative;
+    }
+
+    .productinfo h2{
+        color: #FE980F;
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .itempic{
+        width: 255px;
+        height: 255px;
+        background-color: aquamarine;
+    }
+
+    .item-text{
+        text-align: center;
+    }
+
+    button{
+        display: block;
+        margin: auto;
+    }
+}
