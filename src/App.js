@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import MainRouter from './routers/main-router';
 import { Topbar, MainMenu, Footer } from './components/layouts/';
 import {ShopPage} from './pages/shop-page/shop-page.js'
+import './App.scss';
 
 class App extends Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="body">
         <Topbar />
         <div style={{paddingLeft: 72, paddingRight: 72}}>
           <MainRouter /> 
