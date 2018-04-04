@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom';
 import './item-box.scss';
 
 export class ItemBox extends React.Component {
+    addToCart = () => {
+        let cart = []
+        let tmp = localStorage.getItem("cart")
+        console.log(tmp)
+        if(tmp!=null){
+            cart = JSON.parse(tmp)
+        }
+        cart.push(this.props.item.id);
+        localStorage.setItem("cart",JSON.stringify(cart))
+    }
   render () {
     return (
     <div className="item-box">
@@ -12,7 +22,7 @@ export class ItemBox extends React.Component {
             <div className="itempic"></div>
             <h2 className="item-text">{this.props.item.price}</h2>
             <p className="item-text">{this.props.item.name}</p>
-            <Button>Add</Button>
+            <Button onClick={this.addToCart}>Add</Button>
         </div>
       </div>
     </div>
@@ -20,11 +30,3 @@ export class ItemBox extends React.Component {
   }
 }
 
-// <div class="product-image-wrapper">
-// 								<div class="single-products">
-// 									<div class="productinfo text-center">
-// 										<img src="images/home/product4.jpg" alt="" />
-// 										<h2>180 Bath</h2>
-// 										<p>Simply Sweet</p>
-// 										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-// 									</div>

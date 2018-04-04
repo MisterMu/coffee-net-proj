@@ -1,9 +1,10 @@
 .item-box{
     .product-image-wrapper{
     	border:1px solid #F7F7F5;
-        overflow: hidden;
+        // overflow: hidden;
         margin-bottom:30px;
-        width: 255px;
+        width: 275px;
+        padding: 10px;
        //margin: auto;
     }
 
@@ -34,6 +35,7 @@
     }
 
     .itempic{
+        margin-bottom: 10px;
         width: 255px;
         height: 255px;
         background-color: aquamarine;
