@@ -3,7 +3,6 @@ import { Menu, Divider } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 
 import './styles.scss';
-import color from '../../assets/values/color';
 
 export class CategorySideMenu extends React.Component {
   constructor (props) {

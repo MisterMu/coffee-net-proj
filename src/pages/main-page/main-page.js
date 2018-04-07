@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Divider } from 'antd';
+import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { MainMenu, ItemGroup } from '../../components/layouts';
 import * as axios from 'axios';

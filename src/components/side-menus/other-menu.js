@@ -1,7 +1,6 @@
 import React from 'react';
 import { Menu, Divider } from 'antd';
 import './styles.scss';
-import color from '../../assets/values/color';
 
 export class OtherSideMenu extends React.Component {
   handleClick = (e) => {
