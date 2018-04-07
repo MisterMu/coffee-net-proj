@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from 'antd';
+import { Divider, Spin } from 'antd';
 
 import './item-group.scss';
 import { ItemBox } from '..';
@@ -7,16 +7,16 @@ import { ItemBox } from '..';
 export class ItemGroup extends React.Component {
   render() {
     let tmp = [];
-    if (this.props.data) {
+    if (this.props.data != 0) {
       tmp = this.props.data.map((item) => {
         return (
           <div className="box" >
-            <ItemBox data={item} />
+            <ItemBox data={item} key={item.id} />
           </div>
         );
       });
     } else {
-      tmp = null;
+      tmp = <div className="spin"><Spin /></div>;
     }
 
     return (
