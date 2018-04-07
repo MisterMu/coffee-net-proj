@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 import MainRouter from './routers/main-router';
-import { Topbar, MainMenu, Footer } from './components/layouts/';
-import {ShopPage} from './pages/shop-page/shop-page.js'
+import { Topbar, Footer } from './components/layouts/';
 import './App.scss';
 import * as axios from 'axios';
 
@@ -23,7 +20,6 @@ class App extends Component {
         <Topbar />
         <div style={{paddingLeft: 72, paddingRight: 72}}>
           <MainRouter /> 
-          {/* <ShopPage /> */}
         </div>
         <Footer />
       </div>
