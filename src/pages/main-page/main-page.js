@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { MainMenu, ItemGroup } from '../../components/layouts';
+import * as axios from 'axios';
 
 import './main-page.scss';
 
@@ -9,20 +10,23 @@ export class MainPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      data: []
+      top_item: [],
+      stores: []
     }
   }
 
   componentDidMount () {
-    // get data from api
-    let tmp = [1, 2, 3, 4, 5].map((i) => {
-      return {
-        id: '00' + i,
-        name: 'product ' + i,
-        price: '200 Baht'
-      }
-    });
-    this.setState({ data: tmp });
+    // axios.get('/item/top/5').then((val) => {
+    //   let tmp = val.data.map((item) => {
+    //     return {
+    //       id: item.id,
+    //       name: item.nameEn + ' ' + item.size,
+    //       price: item.price + ' ฿',
+    //       img_path: item.image
+    //     }
+    //   });
+    //   this.setState({ top_item: tmp, ready: true });
+    // }).catch(err => console.log(err));
   }
 
   render () {
@@ -38,7 +42,7 @@ export class MainPage extends React.Component {
         <div className="banner-img">
           BANNER
         </div>
-        <ItemGroup data={this.state.data} />
+        <ItemGroup data={this.state.top_item} title="Top 5 Products!!" />
       </div>
     );
   }

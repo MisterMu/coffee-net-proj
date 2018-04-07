@@ -5,6 +5,9 @@ import MainRouter from './routers/main-router';
 import { Topbar, MainMenu, Footer } from './components/layouts/';
 import {ShopPage} from './pages/shop-page/shop-page.js'
 import './App.scss';
+import * as axios from 'axios';
+
+axios.defaults.baseURL = "http://se-coffee-backend.herokuapp.com/api";
 
 class App extends Component {
   constructor (props) {
