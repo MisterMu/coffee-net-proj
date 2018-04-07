@@ -16,18 +16,22 @@ export class ItemBox extends React.Component {
   }
 
   render () {
-    return (
-    <div className="item-box">
-      <div className="product-image-wrapper">
-        <div className="single-products">
-            <div className="itempic"></div>
-            <h2 className="item-text">{this.props.data.price}</h2>
-            <p className="item-text">{this.props.data.name}</p>
-            <Button onClick={this.addToCart}>Add</Button>
+    if (this.props.data) {
+      return (
+        <div className="item-box">
+          <div className="product-image-wrapper">
+            <div className="single-products">
+                <div className="itempic"></div>
+                <h2 className="item-text">{this.props.data.price}</h2>
+                <p className="item-text">{this.props.data.name}</p>
+                <Button onClick={this.addToCart}>Add</Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 
