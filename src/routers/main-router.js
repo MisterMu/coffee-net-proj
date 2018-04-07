@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { LoginPage, MainPage } from '../pages';
+import { LoginPage, MainPage, CartPage } from '../pages';
 
 const testParam = ({match}) => {
   return (
@@ -20,7 +20,7 @@ const MainRouter = () => (
     <Route path="/account" component={null} />
     <Route path="/wishlist" component={null} />
     <Route path="/checkout" component={null} />
-    <Route path="/cart" component={null} />
+    <Route path="/cart" component={CartPage} />
     <Route path="/login" component={LoginPage} />
     <Route path="/store/:id" component={testParam} />
     <Route component={redirect} />
