@@ -1,14 +1,10 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { LoginPage, MainPage, CartPage } from '../pages';
+import { LoginPage, MainPage, CartPage, ShopPage } from '../pages';
 
-const testParam = ({match}) => {
-  return (
-    <div>
-      <h2>{match.params.id}</h2>
-    </div>
-  );
-};
+const navShopPage = ({match}) => {
+  return <ShopPage shop_id={match.params.id} />
+}
 
 const redirect = () => (
   <Redirect to="/" />
@@ -22,7 +18,7 @@ const MainRouter = () => (
     <Route path="/checkout" component={null} />
     <Route path="/cart" component={CartPage} />
     <Route path="/login" component={LoginPage} />
-    <Route path="/store/:id" component={testParam} />
+    <Route path="/store/:id" component={navShopPage} />
     <Route component={redirect} />
   </Switch>
 );
