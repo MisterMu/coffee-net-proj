@@ -9,7 +9,7 @@ import '../css/animate.css';
 // import '../css/prettyPhoto.css';
 import '../css/price-range.css';
 import '../css/responsive.css';
-import { ItemBox } from '../../components/layouts/itembox/item-box';
+import { ItemBox } from '../../components/layouts/item-box/item-box';
 
 export class ShopPage extends React.Component {
 	constructor (props) {
