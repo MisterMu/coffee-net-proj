@@ -6,6 +6,9 @@
     justify-content: center;
     .box {
       margin: 15px;
+      &:hover {
+        cursor: pointer;
+      }
     }
     .spin {
       margin: 30px auto;
