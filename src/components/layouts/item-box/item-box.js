@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 
 import './item-box.scss';
 
@@ -19,14 +19,14 @@ export class ItemBox extends React.Component {
     if (this.props.data) {
       return (
         <div className="item-box">
-          <div className="product-image-wrapper">
-            <div className="single-products">
-                <div className="itempic"><img className="img" src={this.props.data.img_path} alt="item pic" /></div>
-                <h2 className="item-text">{this.props.data.price}</h2>
-                <p className="item-text">{this.props.data.name}</p>
-                <Button onClick={this.addToCart}>Add</Button>
-            </div>
+          <div className="pic">
+            <img className="img" src={this.props.data.img_path} alt="item pic" />
           </div>
+          <h3 className="name">{this.props.data.name}</h3>
+          <p className="price">{this.props.data.price}</p>
+          <Button onClick={this.addToCart}>
+            Add to cart <Icon type="shopping-cart" />
+          </Button>
         </div>
       );
     } else {

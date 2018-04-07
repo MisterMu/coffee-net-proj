@@ -21,7 +21,7 @@ export class MainPage extends React.Component {
       let tmp = val.data.map((item) => {
         return {
           id: item.id,
-          name: item.nameEn + ' ' + item.size,
+          name: item.nameEn,
           price: item.price + ' ฿',
           img_path: item.image
         }
