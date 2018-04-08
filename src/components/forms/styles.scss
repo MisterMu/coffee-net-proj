@@ -1,5 +1,5 @@
 .login-form {
-  max-width: 300px;
+  width: 300px;
   .login-form-forgot {
     float: right;
   }
@@ -10,12 +10,12 @@
 }
 
 .register-form {
-  max-width: 300px;
+  width: 300px;
   .register-submit-btn {
     width: 100%;
   }
 }
 
-Form {
-  width: 300px;
+.apply-form {
+  width: 500px;
 }
