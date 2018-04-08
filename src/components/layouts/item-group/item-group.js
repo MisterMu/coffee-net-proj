@@ -7,7 +7,7 @@ import { ItemBox, StoreBox } from '..';
 export class ItemGroup extends React.Component {
   render() {
     let tmp = [];
-    if (this.props.data != 0) {
+    if (this.props.data.length !== 0) {
       if (this.props.type === 'stores') {
         tmp = this.props.data.map((store) => {
           return (
