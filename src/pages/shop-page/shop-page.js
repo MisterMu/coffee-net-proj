@@ -20,7 +20,7 @@ export class ShopPage extends React.Component {
       let items = val.data.map((item) => {
         return {
           id: item.id,
-          name: item.nameEn + ' ' + item.size,
+          name: item.nameEn,
           price: item.price + ' ฿',
           img_path: item.image
         }
@@ -34,10 +34,10 @@ export class ShopPage extends React.Component {
       <div className="shop-page">
         <section>
           <MainMenu>
-            <Link to="/account"><Icon type="user" /> Account </Link>
-            <Link to="/wishlist"><Icon type="star-o" /> Wishlist </Link>
-            <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
+            <Link to="/"><Icon type="home" /> Home </Link>
             <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
+            <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
+            <Link to="/applying"><Icon type="solution" /> Join us </Link>
             <Link to="/login"><Icon type="login" /> Login </Link>
           </MainMenu>
           <div className="banner-img">BANNER</div>
