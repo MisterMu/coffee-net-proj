@@ -10,7 +10,7 @@ export class MainMenu extends React.Component {
         <div className="menu-content">
           <Link to="/">
             <div className="logo">
-
+              <img src={this.props.img || require('../../../assets/images/logo.png')} alt="logo" />
             </div>
           </Link>
           <div className="menu">
