@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 const FormItem = Form.Item;
 
 class RawApplyForm extends React.Component {
