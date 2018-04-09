@@ -73,7 +73,6 @@ class RawLoginForm extends React.Component {
             })(
               <Checkbox>Remember me</Checkbox>
             )}
-            {/* <a className="login-form-forgot" href="">Forgot password</a> */}
             <Button type="primary" htmlType="submit" loading={this.state.disabled} className="login-form-button">
               Log in
             </Button>
