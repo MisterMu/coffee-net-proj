@@ -1,5 +1,5 @@
 .side-menu {
-  width: 256px;
+  max-width: 256px;
 }
 
 .title {
@@ -13,4 +13,16 @@
 
 .ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-inline>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-vertical-left>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical-left>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-vertical-right>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical-right>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before, .ant-menu-submenu-vertical>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:after, .ant-menu-submenu-vertical>.ant-menu-submenu-title:hover .ant-menu-submenu-arrow:before {
   background: linear-gradient(90deg,#F09D3B,#F09D3B)!important;
+}
+
+.ant-menu-inline .ant-menu-item:after, .ant-menu-vertical-left .ant-menu-item:after, .ant-menu-vertical-right .ant-menu-item:after, .ant-menu-vertical .ant-menu-item:after {
+  border-right-color: #F09D3B!important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #ffe9cd!important;
+}
+
+.ant-menu-item-selected, .ant-menu-item-selected>a, .ant-menu-item-selected>a:hover {
+  color: #F09D3B!important;
 }
