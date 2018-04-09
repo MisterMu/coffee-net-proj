@@ -1,6 +1,6 @@
 import React from 'react';
 import { ItemGroup } from '../../components/layouts';
-import * as axios from 'axios';
+import Axios from 'axios';
 
 import './main-page.scss';
 
@@ -15,7 +15,7 @@ export class MainPage extends React.Component {
 
   componentDidMount () {
     document.title = "Coffee-Net"
-    axios.get('/item/top/5').then((val) => {
+    Axios.get('/item/top/5').then((val) => {
       let tmp = val.data.map((item) => {
         return {
           id: item.id,
@@ -25,15 +25,19 @@ export class MainPage extends React.Component {
         }
       });
       this.setState({ top_item: tmp, ready: true });
-    }).catch(err => console.log(err));
-    let tmp = [0, 1, 2, 3].map((i) => {
-      return {
-        id: i,
-        name: 'store ' + i,
-        img: ''
+    }).catch(err => console.error(err));
+    Axios.get('/shop/all').then((res) => {
+      if (res.data) {
+        let tmp = res.data.map((shop) => {
+          return {
+            id: shop.id,
+            name: shop.name,
+            img: shop.logo
+          }
+        });
+        this.setState({ stores: tmp });
       }
-    });
-    this.setState({ stores: tmp });
+    }).catch(err => console.error(err));
   }
 
   render () {
@@ -41,7 +45,7 @@ export class MainPage extends React.Component {
       <div className="main-page">
         <section>
           <div className="banner-img">
-            BANNER
+            <img src={require('../../assets/images/banner.jpg')} alt="official banner" />
           </div>
         </section>
         <section>

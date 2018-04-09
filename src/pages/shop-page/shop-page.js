@@ -9,13 +9,16 @@ export class ShopPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      shop: {}
     }
   }
 
   componentDidMount() {
-    Axios.get('/item/all').then((val) => {
-      let items = val.data.map((item) => {
+    Axios.get('/shop/get/' + this.props.shop_id).then((val) => {
+      console.log(val);
+      let items = val.data[0].items;
+      let tmp = items.map((item) => {
         return {
           id: item.id,
           name: item.nameEn,
@@ -23,7 +26,12 @@ export class ShopPage extends React.Component {
           img_path: item.image
         }
       });
-      this.setState({ items: items });
+      let shop = {
+        name: val.data[0].name,
+        logo: val.data[0].logo,
+        banner: val.data[0].banner
+      }
+      this.setState({ items: tmp, shop: shop });
     });
   }
 
@@ -31,12 +39,13 @@ export class ShopPage extends React.Component {
     return (
       <div className="shop-page">
         <section>
-          <div className="banner-img">BANNER</div>
+          <div className="banner-img">
+            <img src={this.state.shop.banner} alt={this.state.shop.name + " banner"} />
+          </div>
         </section>
         <div className="layout">
           <section>
             <CategorySideMenu />
-            <OtherSideMenu />
           </section>
           <section>
             <ItemGroup data={this.state.items} title="Items" />
