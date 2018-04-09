@@ -3,3 +3,4 @@ export * from './main-page/main-page.js';
 export * from './cart-page/cart-page.js';
 export * from './shop-page/shop-page.js';
 export * from './applying-page/applying-page.js';
+export * from './super-admin-page';
