@@ -7,8 +7,7 @@ export class ItemBox extends React.Component {
   addToCart = () => {
       let cart = []
       let tmp = localStorage.getItem("cart")
-      console.log(tmp)
-      if(tmp!=null){
+      if(tmp != null){
           cart = JSON.parse(tmp)
       }
       cart.push(this.props.data.id);
