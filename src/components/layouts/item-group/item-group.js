@@ -11,16 +11,16 @@ export class ItemGroup extends React.Component {
       if (this.props.type === 'stores') {
         tmp = this.props.data.map((store) => {
           return (
-            <div className="box">
-              <StoreBox data={store} key={store.id} />
+            <div className="box" key={store.id}>
+              <StoreBox data={store} />
             </div>
           );
         });
       } else {
         tmp = this.props.data.map((item) => {
           return (
-            <div className="box" >
-              <ItemBox data={item} key={item.id} />
+            <div className="box" key={item.id}>
+              <ItemBox data={item} />
             </div>
           );
         });
