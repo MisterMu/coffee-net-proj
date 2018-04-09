@@ -1,6 +1,8 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Icon } from 'antd';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import { LoginPage, MainPage, CartPage, ShopPage, ApplyingPage } from '../pages';
+import { MainMenu } from '../components';
 import { AdminRouter } from './admin-router';
 
 const navShopPage = ({match}) => {
@@ -22,16 +24,25 @@ const redirect = () => (
 const MainRouter = () => {
   window.scrollTo(0, 0);
   return (
-    <Switch>
-      <Route exact path="/" component={MainPage} />
-      <Route path="/checkout" component={null} />
-      <Route path="/cart" component={CartPage} />
-      <Route path="/login" component={chkSession} />
-      <Route path="/applying" component={ApplyingPage} />
-      <Route path="/store/:id" component={navShopPage} />
-      <Route path="/admin" component={AdminRouter} />
-      <Route component={redirect} />
-    </Switch>
+    <div>
+      <MainMenu>
+        <Link to="/"><Icon type="home" /> Home </Link>
+        <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
+        <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
+        <Link to="/applying"><Icon type="solution" /> Join us </Link>
+        <Link to="/login"><Icon type="login" /> Login </Link>
+      </MainMenu>
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+        <Route path="/checkout" component={null} />
+        <Route path="/cart" component={CartPage} />
+        <Route path="/login" component={chkSession} />
+        <Route path="/applying" component={ApplyingPage} />
+        <Route path="/store/:id" component={navShopPage} />
+        <Route path="/admin" component={AdminRouter} />
+        <Route component={redirect} />
+      </Switch>
+    </div>
   );
 };
 

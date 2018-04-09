@@ -1,7 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
-import { MainMenu, ItemGroup } from '../../components/layouts';
+import { ItemGroup } from '../../components/layouts';
 import * as axios from 'axios';
 
 import './main-page.scss';
@@ -42,13 +40,6 @@ export class MainPage extends React.Component {
     return (
       <div className="main-page">
         <section>
-          <MainMenu>
-            <Link to="/"><Icon type="home" /> Home </Link>
-            <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
-            <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
-            <Link to="/applying"><Icon type="solution" /> Join us </Link>
-            <Link to="/login"><Icon type="login" /> Login </Link>
-          </MainMenu>
           <div className="banner-img">
             BANNER
           </div>

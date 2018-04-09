@@ -1,9 +1,7 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
-import { MainMenu, CategorySideMenu, OtherSideMenu, ItemGroup } from '../../components';
+import { CategorySideMenu, OtherSideMenu, ItemGroup } from '../../components';
 import './shop-page.scss';
 
 
@@ -33,13 +31,6 @@ export class ShopPage extends React.Component {
     return (
       <div className="shop-page">
         <section>
-          <MainMenu>
-            <Link to="/"><Icon type="home" /> Home </Link>
-            <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
-            <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
-            <Link to="/applying"><Icon type="solution" /> Join us </Link>
-            <Link to="/login"><Icon type="login" /> Login </Link>
-          </MainMenu>
           <div className="banner-img">BANNER</div>
         </section>
         <div className="layout">

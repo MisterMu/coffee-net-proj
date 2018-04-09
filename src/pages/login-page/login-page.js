@@ -1,7 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
-import { Link } from 'react-router-dom';
-import { LoginForm, RegisterForm, MainMenu } from '../../components';
+import { LoginForm, RegisterForm } from '../../components';
 
 import './login-page.scss';
 
@@ -21,15 +19,8 @@ export class LoginPage extends React.Component {
 
   render () {
     return (
-      <div>
-        <MainMenu>
-          <Link to="/"><Icon type="home" /> Home </Link>
-          <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
-          <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
-          <Link to="/applying"><Icon type="solution" /> Join us </Link>
-          <Link to="/login"><Icon type="login" /> Login </Link>
-        </MainMenu>
-        <div className="host">
+      <div className="login-page">
+        <section>
           <div className="login-card">
             <LoginForm />
             <div className="divider">
@@ -37,7 +28,7 @@ export class LoginPage extends React.Component {
             </div>
             <RegisterForm />
           </div>
-        </div>
+        </section>
       </div>
     );
   }
