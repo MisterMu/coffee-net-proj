@@ -1,12 +1,15 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Alert } from 'antd';
+import Axios from 'axios';
 const FormItem = Form.Item;
 
 class RawApplyForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      confirmDirty: false
+      confirmDirty: false,
+      disabled: false,
+      success: false
     }
   }
   validateToNextPassword = (rule, value, callback) => {
@@ -32,10 +35,27 @@ class RawApplyForm extends React.Component {
   }
 
   handleSubmit = (e) => {
+    this.setState({ disabled: true });
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        let body = {
+          email: values.email,
+          pass: values.password,
+          name: values.name,
+          logo: (values.logo === '-')? '' : values.logo,
+          banner: (values.banner === '-')? '' : values.banner
+        }
+        Axios.post('/shop/create', body).then((res) => {
+          if (res.data.success) {
+            this.setState({ disabled: false, success: true });
+          } else {
+            this.setState({ disabled: false });
+          }
+        }).catch(err => console.error(err));
+      } else {
+        this.setState({ disabled: false });
       }
     });
   }
@@ -66,6 +86,7 @@ class RawApplyForm extends React.Component {
     };
     return (
       <Form onSubmit={this.handleSubmit} className="apply-form">
+      {(this.state.success)? <Alert type="success" message="Your shop is already pending, waiting for approval." /> : null}
         <FormItem label="E-mail" {...formItemLayout}>
           {getFieldDecorator('email', {
             rules: [{
@@ -74,7 +95,7 @@ class RawApplyForm extends React.Component {
               required: true, message: 'Please input your E-mail'
             }]
           })(
-            <Input />
+            <Input disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem label="Password" {...formItemLayout}>
@@ -85,7 +106,7 @@ class RawApplyForm extends React.Component {
               validator: this.validateToNextPassword
             }]
           })(
-            <Input type="password" />
+            <Input type="password" disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem label="Confirm Password" {...formItemLayout}>
@@ -96,7 +117,7 @@ class RawApplyForm extends React.Component {
               validator: this.compareToFirstPassword,
             }],
           })(
-            <Input type="password" onBlur={this.handleConfirmBlur} />
+            <Input type="password" onBlur={this.handleConfirmBlur} disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem label="Shop Name" {...formItemLayout}>
@@ -105,7 +126,7 @@ class RawApplyForm extends React.Component {
               required: true, message: 'Please confirm your shop name!',
             }],
           })(
-            <Input />
+            <Input disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem label="Logo (url)" {...formItemLayout}>
@@ -114,7 +135,7 @@ class RawApplyForm extends React.Component {
               required: true, message: 'Give us your shop logo or type \'-\'',
             }],
           })(
-            <Input />
+            <Input disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem label="Banner (url)" {...formItemLayout}>
@@ -123,11 +144,11 @@ class RawApplyForm extends React.Component {
               required: true, message: 'Give us your shop banner or type \'-\'',
             }],
           })(
-            <Input />
+            <Input disabled={this.state.disabled} />
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Register</Button>
+          <Button type="primary" htmlType="submit" loading={this.state.disabled} disabled={this.state.success}>Register</Button>
         </FormItem>
       </Form>
     );
