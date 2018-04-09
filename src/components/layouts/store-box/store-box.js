@@ -22,7 +22,9 @@ export class StoreBox extends React.Component {
     else {
       return (
         <div className="store-box" onClick={this.goToShopPage}>
-          <div className="img-container"/>
+          <div className="img-container">
+            <img src={this.props.data.img} alt={this.props.data.name + " logo"} />
+          </div>
           <p className="store-name">{this.props.data.name}</p>
         </div>
       );
