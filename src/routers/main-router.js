@@ -21,10 +21,9 @@ const redirect = () => (
   <Redirect to="/" />
 );
 
-const MainRouter = () => {
-  window.scrollTo(0, 0);
-  return (
-    <div>
+const mainMenu = () => {
+  if (window.location.pathname.slice(0, 6) !== '/admin') {
+    return (
       <MainMenu>
         <Link to="/"><Icon type="home" /> Home </Link>
         <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
@@ -32,6 +31,17 @@ const MainRouter = () => {
         <Link to="/applying"><Icon type="solution" /> Join us </Link>
         <Link to="/login"><Icon type="login" /> Login </Link>
       </MainMenu>
+    );
+  } else {
+    return null;
+  }
+}
+
+const MainRouter = () => {
+  window.scrollTo(0, 0);
+  return (
+    <div>
+      { mainMenu() }
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/checkout" component={null} />
