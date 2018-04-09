@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Select } from 'antd';
+import { Form, Icon, Input, Button, Select, Alert } from 'antd';
 
 import './styles.scss';
 import Axios from 'axios';
@@ -8,7 +8,9 @@ class RawRegisterForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      confirmDirty: false
+      confirmDirty: false,
+      disabled: false,
+      success: false
     }
   }
 
@@ -32,6 +34,7 @@ class RawRegisterForm extends React.Component {
   }
 
   handleSubmit = (e) => {
+    this.setState({ disabled: true });
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -40,8 +43,10 @@ class RawRegisterForm extends React.Component {
         let pass = values.regis_password;
         let role = values.regis_role;
         Axios.post('/user/register', { email: email, pass: pass, role: role }).then((res) => {
-          console.log(res);
+          this.setState({ disabled: false, success: true });
         }).catch(err => console.log(err));
+      } else {
+        this.setState({ disabled: false });
       }
     });
   }
@@ -50,6 +55,7 @@ class RawRegisterForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="register-form">
+        { (this.state.success)? <Alert type="success" message="Successfully register, now you can login with your e-mail." /> : null }
         <Form.Item>
           {getFieldDecorator('regis_email', {
             rules: [{
@@ -58,14 +64,14 @@ class RawRegisterForm extends React.Component {
               required: true, message: 'Please input your Email!' 
             }]
           })(
-            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} placeholder="E-mail" />
+            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} placeholder="E-mail" disabled={this.state.disabled} />
           )}
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('regis_password', {
             rules: [{ required: true, message: 'Please input your Password!' }]
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} type="password" placeholder="Password" />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} type="password" placeholder="Password" disabled={this.state.disabled} />
           )}
         </Form.Item>
         <Form.Item>
@@ -76,21 +82,21 @@ class RawRegisterForm extends React.Component {
               validator: this.checkPwd
             }]
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} type="password" placeholder="Re-Password" onBlur={this.handleConfirmBlur} />
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0, 0, 0, 0.25) '}} />} type="password" placeholder="Re-Password" onBlur={this.handleConfirmBlur} disabled={this.state.disabled} />
           )}
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('regis_role', {
             rules: [{ required: true, message: 'Please choose your Role!' }]
           })(
-            <Select placeholder="Select a role">
+            <Select placeholder="Select a role" disabled={this.state.disabled}>
               <Select.Option value="super-admin"> Super Admin </Select.Option>
               <Select.Option value="admin"> Admin </Select.Option>
             </Select>
           )}
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="register-submit-btn">
+          <Button type="primary" htmlType="submit" className="register-submit-btn" loading={this.state.disabled}>
             Register
           </Button>
         </Form.Item>
