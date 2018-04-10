@@ -11,11 +11,10 @@ export class CartPage extends React.Component {
     }
 
     checkOut = () => {
-      console.log('chk out')
+      console.log('chk out this cart ->', this.state.data);
     }
 
     onDelete = (id) => {
-      console.log('del', id);
       let items = this.state.data.filter((item) => item.key !== id);
       let tmp = items.map((item) => {
         return item.key;
@@ -25,7 +24,11 @@ export class CartPage extends React.Component {
     }
 
     onNumberChange = (value, record) => {
-      console.log(value, record);
+      let tmp = this.state.data;
+      let index = tmp.indexOf(record);
+      tmp[index].qty = value;
+      tmp[index].price = 
+      this.setState({ data: tmp });
     }
 
     getToCart = () => {
@@ -37,7 +40,8 @@ export class CartPage extends React.Component {
             return {
               key: '' + id,
               name: 'product ' + id,
-              price: '฿' + (200 * id),
+              price: '',
+              ppp: 200,
               qty: 1
           };
           }
@@ -52,6 +56,10 @@ export class CartPage extends React.Component {
     }
   
     render () {
+      let data = this.state.data.map((item) => {
+        item.price = '฿ ' + (item.ppp * item.qty);
+        return item;
+      });
       const column = [{
         title: 'Product',
         dataIndex: 'name',
@@ -64,20 +72,21 @@ export class CartPage extends React.Component {
         title: 'Quantity',
         dataIndex: 'qty',
         key: 'qty',
-        render: (rec) => <InputNumber min={0} max={99} defaultValue={1} onChange={(value) => this.onNumberChange(value, rec)} />,
+        render: (qty, record) => <InputNumber min={0} max={99} defaultValue={1} onChange={(value) => this.onNumberChange(value, record)} />,
 
       }, {
+        title: 'Delete',
         render: (text, record) => {
           return (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record.key)}>
-              <a href="#">Delete</a>
+              <Button icon="delete" type="danger" />
             </Popconfirm>
           );
         },
       }];
       return (
         <div className="cart-page">
-          <Table dataSource={this.state.data} columns={column} />
+          <Table dataSource={data} columns={column} />
           <Button onClick={this.checkOut}><Icon type="shopping-cart" /> Checkout</Button>
         </div>
       );
