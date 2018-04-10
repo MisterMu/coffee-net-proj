@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, InputNumber, Popconfirm, Button, Icon } from 'antd';
 import './cart-page.scss';
+import Axios from 'axios';
 
 export class CartPage extends React.Component {
     constructor (props) {
@@ -31,28 +32,25 @@ export class CartPage extends React.Component {
       this.setState({ data: tmp });
     }
 
-    getToCart = () => {
+    componentDidMount () {
       let cart = []
       let tmp = JSON.parse(localStorage.getItem("cart"));
       if (tmp) {
-        cart = tmp.map((id) => {
-          if (!cart.includes(id)) {
-            return {
-              key: '' + id,
-              name: 'product ' + id,
-              price: '',
-              ppp: 200,
-              qty: 1
-          };
-          }
+        tmp.map((id, i) => {
+          Axios.get('/item/get/' + id).then((res) => {
+            if (res.data) {
+              cart[i] = {
+                key: res.data[0].id,
+                name: res.data[0].nameEn,
+                ppp: res.data[0].price,
+                price: '',
+                qty: 1
+              }
+              this.setState({ data: cart });
+            }
+          })
         });
       }
-      return cart;
-    }
-
-    componentDidMount () {
-      let tmp = this.getToCart();
-      this.setState({ data: tmp });
     }
   
     render () {
