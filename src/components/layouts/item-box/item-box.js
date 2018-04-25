@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Icon, Modal, message } from 'antd';
-
+import { ItemModal } from '../item-modal/item-modal';
 import './item-box.scss';
 
 export class ItemBox extends React.Component {
@@ -53,13 +53,18 @@ export class ItemBox extends React.Component {
       return (
         <div>
           <Modal
-            title="modal"
+            title={this.props.data.name}
             visible={this.state.modal_visible}
             onOk={this.closeModal}
             onCancel={this.closeModal}
-            footer={null}
+            footer={[
+              <Button key="modal-cancel" onClick={this.closeModal}>Cancel</Button>,
+              <Button key="modal-checkout" type="primary" onClick={this.addToCart}>
+                Add to cart <Icon type="shopping-cart" />
+              </Button>,
+            ]}
           >
-            test
+          <ItemModal detail={this.props.data}/>
           </Modal>
           <div className="item-box" onClick={this.openModal}>
             <div className="pic">
