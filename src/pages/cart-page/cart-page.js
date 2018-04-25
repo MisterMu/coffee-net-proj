@@ -73,6 +73,8 @@ export class CartPage extends React.Component {
             }
           });
         });
+      } else {
+        this.setState({ loading: false });
       }
     }
   
