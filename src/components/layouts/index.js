@@ -4,3 +4,4 @@ export * from './footer/footer.js';
 export * from './item-group/item-group.js';
 export * from './item-box/item-box.js';
 export * from './store-box/store-box.js';
+export * from './checkout-modal/checkout-modal.js';
