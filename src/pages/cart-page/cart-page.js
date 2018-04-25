@@ -8,8 +8,16 @@ export class CartPage extends React.Component {
       super(props);
       this.state = {
         data: [],
-        loading: true
+        loading: true,
+        sort_info: {
+          columnKey: 'shop',
+          order: 'ascend'
+        }
       }
+    }
+
+    onTableChange = (pagination, filters, sorter) => {
+      this.setState({ sort_info: sorter });
     }
 
     checkOut = () => {
@@ -45,7 +53,8 @@ export class CartPage extends React.Component {
                 name: res.data[0].nameEn,
                 ppp: res.data[0].price,
                 price: '',
-                qty: 1
+                qty: 1,
+                shop: res.data[0].shop.name
               })
               this.setState({ data: cart, loading: false });
             }
@@ -55,6 +64,7 @@ export class CartPage extends React.Component {
     }
   
     render () {
+      let sort_info = this.state.sort_info || {};
       let data = this.state.data.map((item) => {
         item.price = '฿ ' + (item.ppp * item.qty);
         return item;
@@ -63,11 +73,21 @@ export class CartPage extends React.Component {
         title: 'Product',
         dataIndex: 'name',
         key: 'name',
+        sorter: (a, b) => (a.name >= b.name)? 1 : -1,
+        sortOrder: sort_info.columnKey === 'name' && sort_info.order
+      }, {
+        title: 'Shop Name',
+        dataIndex: 'shop',
+        key: 'shop',
+        sorter: (a, b) => (a.shop >= b.shop)? 1 : -1,
+        sortOrder: sort_info.columnKey === 'shop' && sort_info.order
       }, {
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
-      },{
+        sorter: (a, b) => (a.ppp * a.qty) - (b.ppp * b.qty),
+        sortOrdder: sort_info.columnKey === 'price' && sort_info.order
+      }, {
         title: 'Quantity',
         dataIndex: 'qty',
         key: 'qty',
@@ -85,7 +105,7 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
-          <Table dataSource={data} columns={column} loading={this.state.loading} />
+          <Table dataSource={data} columns={column} loading={this.state.loading} onChange={this.onTableChange} />
           <Button onClick={this.checkOut}><Icon type="shopping-cart" /> Checkout</Button>
         </div>
       );
