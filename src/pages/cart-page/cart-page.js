@@ -18,6 +18,11 @@ export class CartPage extends React.Component {
       }
     }
 
+    clearCart = () => {
+      localStorage.setItem('cart', '');
+      this.setState({ data: [] });
+    }
+
     onTableChange = (pagination, filters, sorter) => {
       this.setState({ sort_info: sorter });
     }
@@ -56,8 +61,9 @@ export class CartPage extends React.Component {
 
     componentDidMount () {
       let cart = []
-      let tmp = JSON.parse(localStorage.getItem("cart"));
+      let tmp = localStorage.getItem("cart");
       if (tmp && tmp.length !== 0) {
+        tmp = JSON.parse(tmp);
         tmp.forEach((id, i) => {
           Axios.get('/item/get/' + id).then((res) => {
             if (res.data) {
@@ -122,7 +128,7 @@ export class CartPage extends React.Component {
       return (
         <div className="cart-page">
 
-        <Modal
+          <Modal
             title="Checkout"
             visible={this.state.modal_visible}
             onOk={this.closeModal}
@@ -137,7 +143,12 @@ export class CartPage extends React.Component {
             <CheckoutModal items={data}/>
           </Modal>
           <Table dataSource={data} columns={column} loading={this.state.loading} onChange={this.onTableChange} />
-          <Button onClick={this.openModal}><Icon type="shopping-cart" /> Checkout</Button>
+          <div className="button-container">
+            <Button onClick={this.openModal}><Icon type="shopping-cart" /> Checkout</Button>
+            <Popconfirm title="Sure to delete?" onConfirm={this.clearCart}>
+              <Button icon="delete" type="danger" disabled={data.length === 0}>Delete</Button>
+            </Popconfirm>
+          </div>
         </div>
       );
     }
