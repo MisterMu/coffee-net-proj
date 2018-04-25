@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, InputNumber, Popconfirm, Button, Icon, Modal } from 'antd';
 import './cart-page.scss';
 import Axios from 'axios';
+import { CheckoutModal } from '../../components/layouts';
 
 export class CartPage extends React.Component {
     constructor (props) {
@@ -9,7 +10,8 @@ export class CartPage extends React.Component {
       this.state = {
         data: [],
         loading: true,
-        modal_visible: false
+        modal_visible: false,
+
       }
     }
 
@@ -69,6 +71,7 @@ export class CartPage extends React.Component {
     render () {
       let data = this.state.data.map((item) => {
         item.price = '฿ ' + (item.ppp * item.qty);
+        item.pricer = (item.ppp * item.qty);
         return item;
       });
       const column = [{
@@ -97,6 +100,7 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
+
         <Modal
             title="Checkout"
             visible={this.state.modal_visible}
@@ -109,7 +113,7 @@ export class CartPage extends React.Component {
               </Button>,
             ]}
           >
-            test
+            <CheckoutModal items={data}/>
           </Modal>
           <Table dataSource={data} columns={column} loading={this.state.loading} />
           <Button onClick={this.openModal}><Icon type="shopping-cart" /> Checkout</Button>
