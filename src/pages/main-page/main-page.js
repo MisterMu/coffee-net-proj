@@ -49,7 +49,8 @@ export class MainPage extends React.Component {
           </div>
         </section>
         <section>
-          <ItemGroup data={this.state.top_item} title="Top 5 Products!!" />
+          <ItemGroup data={this.state.top_item} title="Coffee Best Selling" />
+          <ItemGroup data={[]} title="Others Best Selling" />
           <ItemGroup type="stores" data={this.state.stores} title="Our Stores" />
         </section>
       </div>
