@@ -19,8 +19,15 @@ export class CheckoutModal extends React.Component {
 
     render(){
         return (
+            <div clssName='checkout-modal'>
             <div>
-            ยอดรวม (จำนวน {this.state.qty} ชิ้น)	    ฿{this.state.price}
+            <span className='left'>
+            ยอดรวม (จำนวน {this.state.qty} ชิ้น)
+            </span>	   
+            <span className='right'>
+             ฿{this.state.price}
+             </span>
+            </div>
             </div>
         );
     }

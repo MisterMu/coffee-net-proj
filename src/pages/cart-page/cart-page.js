@@ -128,7 +128,7 @@ export class CartPage extends React.Component {
             footer={[
               <Button key="modal-cancel" onClick={this.closeModal}>Cancel</Button>,
               <Button key="modal-checkout" type="primary" onClick={this.checkOut}>
-                Submit
+                Checkout
               </Button>,
             ]}
           >
