@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, InputNumber, Popconfirm, Button, Icon } from 'antd';
+import { Table, InputNumber, Popconfirm, Button, Icon, Modal } from 'antd';
 import './cart-page.scss';
 import Axios from 'axios';
 
@@ -8,12 +8,24 @@ export class CartPage extends React.Component {
       super(props);
       this.state = {
         data: [],
-        loading: true
+        loading: true,
+        modal_visible: false
       }
     }
 
     checkOut = () => {
       console.log('chk out this cart ->', this.state.data);
+      this.setState({ modal_visible: false });
+    }
+
+    openModal = () => {
+      this.setState({ modal_visible: true });
+    }
+
+    closeModal = (e) => {
+      if (this.state.modal_visible) {
+        this.setState({ modal_visible: false });
+      }
     }
 
     onDelete = (id) => {
@@ -85,8 +97,22 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
+        <Modal
+            title="Checkout"
+            visible={this.state.modal_visible}
+            onOk={this.closeModal}
+            onCancel={this.closeModal}
+            footer={[
+              <Button key="modal-cancel" onClick={this.closeModal}>Cancel</Button>,
+              <Button key="modal-checkout" type="primary" onClick={this.checkOut}>
+                Submit
+              </Button>,
+            ]}
+          >
+            test
+          </Modal>
           <Table dataSource={data} columns={column} loading={this.state.loading} />
-          <Button onClick={this.checkOut}><Icon type="shopping-cart" /> Checkout</Button>
+          <Button onClick={this.openModal}><Icon type="shopping-cart" /> Checkout</Button>
         </div>
       );
     }
