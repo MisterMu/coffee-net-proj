@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, InputNumber, Popconfirm, Button, Icon } from 'antd';
+import { Table, InputNumber, Popconfirm, Button, Icon, Modal } from 'antd';
 import './cart-page.scss';
 import Axios from 'axios';
+import { CheckoutModal } from '../../components/layouts';
 
 export class CartPage extends React.Component {
     constructor (props) {
@@ -9,6 +10,7 @@ export class CartPage extends React.Component {
       this.state = {
         data: [],
         loading: true,
+        modal_visible: false,
         sort_info: {
           columnKey: 'shop',
           order: 'ascend'
@@ -22,6 +24,17 @@ export class CartPage extends React.Component {
 
     checkOut = () => {
       console.log('chk out this cart ->', this.state.data);
+      this.setState({ modal_visible: false });
+    }
+
+    openModal = () => {
+      this.setState({ modal_visible: true });
+    }
+
+    closeModal = (e) => {
+      if (this.state.modal_visible) {
+        this.setState({ modal_visible: false });
+      }
     }
 
     onDelete = (id) => {
@@ -69,6 +82,7 @@ export class CartPage extends React.Component {
       let sort_info = this.state.sort_info || {};
       let data = this.state.data.map((item) => {
         item.price = '฿ ' + (item.ppp * item.qty);
+        item.pricer = (item.ppp * item.qty);
         return item;
       });
       const column = [{
@@ -107,8 +121,23 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
+
+        <Modal
+            title="Checkout"
+            visible={this.state.modal_visible}
+            onOk={this.closeModal}
+            onCancel={this.closeModal}
+            footer={[
+              <Button key="modal-cancel" onClick={this.closeModal}>Cancel</Button>,
+              <Button key="modal-checkout" type="primary" onClick={this.checkOut}>
+                Submit
+              </Button>,
+            ]}
+          >
+            <CheckoutModal items={data}/>
+          </Modal>
           <Table dataSource={data} columns={column} loading={this.state.loading} onChange={this.onTableChange} />
-          <Button onClick={this.checkOut}><Icon type="shopping-cart" /> Checkout</Button>
+          <Button onClick={this.openModal}><Icon type="shopping-cart" /> Checkout</Button>
         </div>
       );
     }
