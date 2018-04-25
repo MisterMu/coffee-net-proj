@@ -7,7 +7,8 @@ export class CartPage extends React.Component {
     constructor (props) {
       super(props);
       this.state = {
-        data: []
+        data: [],
+        loading: true
       }
     }
 
@@ -35,20 +36,20 @@ export class CartPage extends React.Component {
     componentDidMount () {
       let cart = []
       let tmp = JSON.parse(localStorage.getItem("cart"));
-      if (tmp) {
-        tmp.map((id, i) => {
+      if (tmp && tmp.length !== 0) {
+        tmp.forEach((id, i) => {
           Axios.get('/item/get/' + id).then((res) => {
             if (res.data) {
-              cart[i] = {
+              cart.push({
                 key: res.data[0].id,
                 name: res.data[0].nameEn,
                 ppp: res.data[0].price,
                 price: '',
                 qty: 1
-              }
-              this.setState({ data: cart });
+              })
+              this.setState({ data: cart, loading: false });
             }
-          })
+          });
         });
       }
     }
@@ -84,7 +85,7 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
-          <Table dataSource={data} columns={column} />
+          <Table dataSource={data} columns={column} loading={this.state.loading} />
           <Button onClick={this.checkOut}><Icon type="shopping-cart" /> Checkout</Button>
         </div>
       );
