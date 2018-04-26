@@ -45,7 +45,7 @@ export class MainPage extends React.Component {
       <div className="main-page">
         <section>
           <div className="banner-img">
-            <img src={require('../../assets/images/banner.jpg')} alt="official banner" />
+            <img src={require('../../assets/images/coffee_3.png')} alt="official banner" />
           </div>
         </section>
         <section>
