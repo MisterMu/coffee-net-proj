@@ -3,6 +3,17 @@ import { Table, Button } from 'antd';
 import './styles.scss';
 
 export class ShopListTable extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      sort_info: null
+    };
+  }
+
+  handleChange = (pagination, filter, sorter) => {
+    this.setState({ sort_info: sorter });
+  }
+
   renderActionBtn = (record) => {
     return (
       <div className="btn-container">
@@ -13,23 +24,39 @@ export class ShopListTable extends React.Component {
   }
 
   render () {
+    let sort_info = this.state.sort_info || {};
     const columns = [{
       title: 'Name',
       dataIndex: 'name',
-      key: 'name'
+      key: 'name',
+      sorter: (a, b) => (a.name > b.name)? 1 : -1,
+      sortOrder: sort_info.columnKey === 'name' && sort_info.order
     }, {
-      title: 'Revenue',
-      dataIndex: 'revenue',
-      key: 'revenue'
+      title: 'Order',
+      dataIndex: 'order',
+      key: 'order',
+      sorter: (a, b) => a.order - b.order,
+      sortOrder: sort_info.columnKey === 'order' && sort_info.order
+    }, {
+      title: 'Delivered',
+      dataIndex: 'delivered',
+      key: 'delivered',
+      sorter: (a, b) => a.delivered - b.delivered,
+      sortOrder: sort_info.columnKey === 'delivered' && sort_info.order
+    }, {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      sorter: (a, b) => (a.status > b.status)? 1 : -1,
+      sortOrder: sort_info.columnKey === 'status' && sort_info.order
     }, {
       title: 'Action',
       key: 'action',
       render: this.renderActionBtn
     }];
-    console.log('data table', this.props.data)
     return (
       <div>
-        <Table dataSource={this.props.data} columns={columns} />
+        <Table dataSource={this.props.data} columns={columns} onChange={this.handleChange} />
       </div>
     );
   }
