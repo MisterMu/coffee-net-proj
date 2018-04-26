@@ -23,10 +23,6 @@ export class LoginPage extends React.Component {
         <section>
           <div className="login-card">
             <LoginForm />
-            <div className="divider">
-              <b>OR</b>
-            </div>
-            <RegisterForm />
           </div>
         </section>
       </div>
