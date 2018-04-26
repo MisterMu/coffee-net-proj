@@ -1,9 +1,40 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { Icon, Menu, Dropdown, Input, Button } from 'antd';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import { LoginPage, MainPage, CartPage, ShopPage, ApplyingPage } from '../pages';
+import { LoginPage, MainPage, CartPage, ShopPage, ApplyingPage, OrderPage } from '../pages';
 import { MainMenu } from '../components';
 import { AdminRouter } from './admin-router';
+
+class OverlayVisible extends React.Component {
+  state = {
+    visible: false,
+  };
+  handleMenuClick = (e) => {
+    if (e.key === '3') {
+      this.setState({ visible: false });
+    }
+  }
+  handleVisibleChange = (flag) => {
+    this.setState({ visible: flag });
+  }
+  render() {
+    const menu = (
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1"><Input placeholder="order number" /> <Button type="primary"><Icon type="right" /></Button></Menu.Item>
+      </Menu>
+    );
+    return (
+      <Dropdown overlay={menu}
+        onVisibleChange={this.handleVisibleChange}
+        visible={this.state.visible}
+      >
+        <a className="ant-dropdown-link" href="#">
+        <Icon type="search" /> Track My Order <Icon type="down" />
+        </a>
+      </Dropdown>
+    );
+  }
+}
 
 const navShopPage = ({match}) => {
   return <ShopPage shop_id={match.params.id} />
@@ -27,7 +58,7 @@ const mainMenu = () => {
       <MainMenu>
         <Link to="/"><Icon type="home" /> Home </Link>
         <Link to="/cart"><Icon type="shopping-cart" /> Cart </Link>
-        <Link to="/checkout"><Icon type="check-circle-o" /> Checkout </Link>
+        <OverlayVisible />
         <Link to="/applying"><Icon type="solution" /> Join us </Link>
         <Link to="/login"><Icon type="login" /> Login </Link>
       </MainMenu>
@@ -44,7 +75,7 @@ const MainRouter = () => {
       { mainMenu() }
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <Route path="/checkout" component={null} />
+        <Route path="/order" component={OrderPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/login" component={chkSession} />
         <Route path="/applying" component={ApplyingPage} />
