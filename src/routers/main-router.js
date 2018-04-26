@@ -1,39 +1,13 @@
 import React from 'react';
-import { Icon, Menu, Dropdown, Input, Button } from 'antd';
+import { Icon, Menu, Dropdown, Input, Button, message } from 'antd';
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import { LoginPage, MainPage, CartPage, ShopPage, ApplyingPage, OrderPage } from '../pages';
 import { MainMenu } from '../components';
 import { AdminRouter } from './admin-router';
+import Axios from 'axios';
 
-class OverlayVisible extends React.Component {
-  state = {
-    visible: false,
-  };
-  handleMenuClick = (e) => {
-    if (e.key === '3') {
-      this.setState({ visible: false });
-    }
-  }
-  handleVisibleChange = (flag) => {
-    this.setState({ visible: flag });
-  }
-  render() {
-    const menu = (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1"><Input placeholder="order number" /> <Button type="primary"><Icon type="right" /></Button></Menu.Item>
-      </Menu>
-    );
-    return (
-      <Dropdown overlay={menu}
-        onVisibleChange={this.handleVisibleChange}
-        visible={this.state.visible}
-      >
-        <a className="ant-dropdown-link" href="#">
-        <Icon type="search" /> Track My Order <Icon type="down" />
-        </a>
-      </Dropdown>
-    );
-  }
+const navOrderPage = ({match}) => {
+  return <OrderPage order_id={match.params.id} />
 }
 
 const navShopPage = ({match}) => {
@@ -51,6 +25,59 @@ const chkSession = () => {
 const redirect = () => (
   <Redirect to="/" />
 );
+
+class OverlayVisible extends React.Component {
+  state = {
+    visible: false,
+    nav: false,
+    data: ''
+  };
+
+  enterLoading = (val) => {
+    Axios.get('/order/get/' + val).then((res) => {
+      if (res.data.length > 0) {
+        this.setState({ nav: true });
+        this.setState({ data: val });
+      }
+      else {
+        message.error('Cant find your order number ' + val)
+      }
+    });
+  }
+
+  handleVisibleChange = (flag) => {
+    this.setState({ visible: flag });
+  }
+
+  render() {
+    const Search = Input.Search;
+    const menu = (
+      <Menu>
+        <Menu.Item key="1"><Search placeholder="order number" onSearch={value => this.enterLoading(value)} enterButton=">" size="large" /></Menu.Item>
+      </Menu>
+    );
+   
+    if (this.state.nav) {
+      return (
+        <Redirect to={"/order/" + this.state.data} />
+      );
+      this.setState({ nav: false });
+    }
+    else{
+      return (
+        <Dropdown overlay={menu}
+          onVisibleChange={this.handleVisibleChange}
+          visible={this.state.visible}
+        >
+          <a className="ant-dropdown-link" href="#">
+          <Icon type="search" /> Track My Order <Icon type="down" />
+          </a>
+        </Dropdown>
+      );
+
+    }
+  }
+}
 
 const mainMenu = () => {
   if (window.location.pathname.slice(0, 6) !== '/admin') {
@@ -75,7 +102,7 @@ const MainRouter = () => {
       { mainMenu() }
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <Route path="/order" component={OrderPage} />
+        <Route path="/order/:id" component={navOrderPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/login" component={chkSession} />
         <Route path="/applying" component={ApplyingPage} />

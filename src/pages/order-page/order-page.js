@@ -8,36 +8,48 @@ export class OrderPage extends React.Component {
       super(props);
       this.state = {
         data: [],
-        total: '',
-        id: '1'
+        name: '',
+        total: ''
       }
+    }
+
+    getNameStore = (id) => {
+        let str = ''
+        Axios.get('/item/get/' + id).then((val) => {
+            str = val.data[0].shop.name
+            this.setState({ name: str });
+        });
     }
 
     componentDidMount () {
         let tmp = []
-        Axios.get('/order/get/' + this.state.id).then((res) => {
+        Axios.get('/order/get/' + this.props.order_id).then((res) => {
             if (res.data) {
                 for (var shop in res.data[0].itemsByShop) {
                     var items = res.data[0].itemsByShop[shop]
+                    this.getNameStore(items[0].id)
+                    console.log(this.state.name)
+                    tmp.push({
+                        name: 'Sold by : ' + this.state.name
+                    })
+
                     for (var i = 0; i < items.length; i++){
                         tmp.push({
                             name: items[i].nameEn,
                             price: items[i].priceTimesN,
                             qty: items[i].n,
                             status: items[i].status,
-                            description: "Sold by " + items[i].shop_id
                         })
                     }  
                 }
-                this.state.total = res.data[0].totalPrice
+                this.setState({ total: res.data[0].totalPrice });
                 this.setState({ data: tmp });
             }
         });
-      }
+    }
 
     render () {
-        let orderNum = 'Order Number : ' + this.state.id
-
+        let orderNum = 'Order Number : ' + this.props.order_id
         const columns = [{
             title: "Product",
             dataIndex: "name",
@@ -60,7 +72,6 @@ export class OrderPage extends React.Component {
             <div className="order-page">
                 <Table
                     columns={columns}
-                    expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
                     dataSource={this.state.data}
                     title={() => orderNum}
                     footer={() => 'Total : ฿' + this.state.total}
