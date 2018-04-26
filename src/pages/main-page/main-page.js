@@ -9,13 +9,14 @@ export class MainPage extends React.Component {
     super(props);
     this.state = {
       top_item: [],
-      stores: []
+      stores: [],
+      others_item: []
     }
   }
 
   componentDidMount () {
     document.title = "Coffee-Net"
-    Axios.get('/item/top/5').then((val) => {
+    Axios.get('item/topCoffee/3').then((val) => {
       let tmp = val.data.map((item) => {
         return {
           id: item.id,
@@ -25,6 +26,17 @@ export class MainPage extends React.Component {
         }
       });
       this.setState({ top_item: tmp, ready: true });
+    }).catch(err => console.error(err));
+    Axios.get('/item/topOthers/3').then((val) => {
+      let tmp = val.data.map((item) => {
+        return {
+          id: item.id,
+          name: item.nameEn,
+          price: item.price + ' ฿',
+          img_path: item.image
+        }
+      });
+      this.setState({ others_item: tmp, ready: true });
     }).catch(err => console.error(err));
     Axios.get('/shop/all').then((res) => {
       if (res.data) {
@@ -50,7 +62,7 @@ export class MainPage extends React.Component {
         </section>
         <section>
           <ItemGroup data={this.state.top_item} title="Coffee Best Selling" />
-          <ItemGroup data={[]} title="Others Best Selling" />
+          <ItemGroup data={this.state.others_item} title="Others Best Selling" />
           <ItemGroup type="stores" data={this.state.stores} title="Our Stores" />
         </section>
       </div>
