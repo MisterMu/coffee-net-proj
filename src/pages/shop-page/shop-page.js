@@ -23,7 +23,9 @@ export class ShopPage extends React.Component {
           id: item.id,
           name: item.nameEn,
           price: item.price + ' ฿',
-          img_path: item.image
+          img_path: item.image,
+          desc: item.desc,
+          shop_name: val.data[0].name
         }
       });
       let shop = {
