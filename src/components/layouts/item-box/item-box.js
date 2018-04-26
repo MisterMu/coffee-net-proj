@@ -15,7 +15,8 @@ export class ItemBox extends React.Component {
       let cart = []
       let tmp = localStorage.getItem("cart");
       let item_id = this.props.data.id;
-      if (tmp != null) {
+      console.log(tmp);
+      if (tmp) {
           cart = JSON.parse(tmp);
           if (!cart.includes(item_id)) {
             cart.push(item_id);
