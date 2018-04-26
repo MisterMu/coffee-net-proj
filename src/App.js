@@ -4,7 +4,7 @@ import { Topbar, Footer } from './components/layouts/';
 import './App.scss';
 import * as axios from 'axios';
 
-axios.defaults.baseURL = "https://se-coffee-backend-staging.herokuapp.com/api";
+axios.defaults.baseURL = "https://se-coffee-backend.herokuapp.com/api";
 
 class App extends Component {
   constructor (props) {
