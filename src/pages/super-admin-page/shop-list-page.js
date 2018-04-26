@@ -8,7 +8,8 @@ export class ShopListPage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      data: [{}]
+      data: [{}],
+      quantity: [0, 0, 0]
     };
   }
 
@@ -48,16 +49,20 @@ export class ShopListPage extends React.Component {
   delete = (item) => {
     let id = item.key;
     let method = {};
+    let quantity = this.state.quantity;
     if (item.approved) {
       method = Axios.post('/shop/remove/' + id, {});
+      quantity[1] -= 1;
     } else {
       method = Axios.post('./shop/remove/' + id, {});
+      quantity[2] -= 1;
     }
+    quantity[0] -= 1;
     method.then((res) => {
       if (res.data.success) {
         let tmp = this.state.data;
         tmp = tmp.filter((obj) => obj !== item);
-        this.setState({ data: tmp });
+        this.setState({ data: tmp, quantity: quantity });
       }
     }).catch(err => console.error(err));
   }
@@ -65,15 +70,24 @@ export class ShopListPage extends React.Component {
   componentDidMount () {
     Axios.get('/shop/all').then((res) => {
       if (res.data) {
-        let tmp = res.data.map((shop) => {
+        console.log(res.data);
+        let quantity = [res.data.length, 0, 0];
+        let tmp = res.data.map((shop, i) => {
+          if (shop.approved) {
+            quantity[1] += 1;
+          } else {
+            quantity[2] += 1;
+          }
           return {
             key: shop.id + '',
             name: shop.name,
-            revenue: '1000 ฿',
+            order: i,
+            delivered: i,
+            status: (shop.approved)? 'Approved' : 'Pending',
             approved: shop.approved
           }
         });
-        this.setState({ data: tmp });
+        this.setState({ data: tmp, quantity: quantity });
       }
     }).catch(err => console.error(err));
   }
@@ -86,7 +100,7 @@ export class ShopListPage extends React.Component {
     return (
       <div className="shop-list-page">
         <section>
-          <ShopListMenu action={this.filtering} />
+          <ShopListMenu action={this.filtering} quantity={this.state.quantity} />
         </section>
         <section className="content">
           <ShopListTable data={this.state.data} action={cmd} />

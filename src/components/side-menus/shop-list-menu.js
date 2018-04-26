@@ -16,9 +16,24 @@ export class ShopListMenu extends React.Component {
           mode="inline"
           defaultSelectedKeys={['1']}
         >
-          <Menu.Item key="1"> All </Menu.Item>
-          <Menu.Item key="2"> Approved </Menu.Item>
-          <Menu.Item key="3"> Pending </Menu.Item>
+          <Menu.Item key="1">
+            <div>
+              <span style={{float: 'left'}}> All </span>
+              <span style={{float: 'right'}}> {this.props.quantity[0]} </span>
+            </div>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <div>
+              <span style={{float: 'left'}}> Approved </span>
+              <span style={{float: 'right'}}> {this.props.quantity[1]} </span>
+            </div>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <div>
+              <span style={{float: 'left'}}> Pending </span>
+              <span style={{float: 'right'}}> {this.props.quantity[2]} </span>
+            </div>
+          </Menu.Item>
         </Menu>
       </div>
     );
