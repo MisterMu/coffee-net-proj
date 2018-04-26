@@ -81,8 +81,8 @@ export class ShopListPage extends React.Component {
           return {
             key: shop.id + '',
             name: shop.name,
-            order: i,
-            delivered: i,
+            total_income: shop.totalIncome,
+            delivered: shop.percentageDelivered + '%',
             status: (shop.approved)? 'Approved' : 'Pending',
             approved: shop.approved
           }

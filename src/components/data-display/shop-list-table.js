@@ -32,13 +32,13 @@ export class ShopListTable extends React.Component {
       sorter: (a, b) => (a.name > b.name)? 1 : -1,
       sortOrder: sort_info.columnKey === 'name' && sort_info.order
     }, {
-      title: 'Order',
-      dataIndex: 'order',
-      key: 'order',
-      sorter: (a, b) => a.order - b.order,
-      sortOrder: sort_info.columnKey === 'order' && sort_info.order
+      title: 'Total Income',
+      dataIndex: 'total_income',
+      key: 'total_income',
+      sorter: (a, b) => a.total_income - b.total_income,
+      sortOrder: sort_info.columnKey === 'total_income' && sort_info.order
     }, {
-      title: 'Delivered',
+      title: 'Delivered Percentage',
       dataIndex: 'delivered',
       key: 'delivered',
       sorter: (a, b) => a.delivered - b.delivered,
