@@ -15,7 +15,8 @@ export class ShopPage extends React.Component {
   }
 
   filterByCat = (cat) => {
-    Axios.get('/item/findByCat/' + cat).then((res) => {
+    this.setState({ items: [] });
+    Axios.get('/item/findByCat/' + cat + '/' + this.props.shop_id).then((res) => {
       console.log(res);
       let items = res.data.map((item, i) => {
         return {
