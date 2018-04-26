@@ -41,14 +41,6 @@ export class ItemBox extends React.Component {
     }
   }
 
-  prepareModalData = () => {
-    
-  }
-
-  componentDidMount () {
-
-  }
-
   render () {
     if (this.props.data) {
       return (
@@ -65,7 +57,7 @@ export class ItemBox extends React.Component {
               </Button>,
             ]}
           >
-          <ItemModal detail={this.props.data}/>
+            <ItemModal detail={this.props.data}/>
           </Modal>
           <div className="item-box" onClick={this.openModal}>
             <div className="pic">
