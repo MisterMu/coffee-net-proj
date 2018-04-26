@@ -14,7 +14,7 @@ export class CategorySideMenu extends React.Component {
   }
 
   handleClick = (e) => {
-    console.log('click', e);
+    this.props.filter(e.key);
   }
 
   componentDidMount () {
@@ -26,7 +26,7 @@ export class CategorySideMenu extends React.Component {
   render () {
     let items = this.state.items.map((item, i) => {
       return (
-        <Menu.Item key={i}>{item}</Menu.Item>
+        <Menu.Item key={item}>{item}</Menu.Item>
       );
     });
     return (

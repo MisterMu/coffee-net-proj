@@ -14,6 +14,23 @@ export class ShopPage extends React.Component {
     }
   }
 
+  filterByCat = (cat) => {
+    Axios.get('/item/findByCat/' + cat).then((res) => {
+      console.log(res);
+      let items = res.data.map((item, i) => {
+        return {
+          id: item.id,
+          name: item.nameEn,
+          price: item.price + ' ฿',
+          img_path: item.image,
+          desc: item.desc,
+          shop_name: item.shop.name
+        }
+      });
+      this.setState({ items: items });
+    });
+  }
+
   componentDidMount() {
     Axios.get('/shop/get/' + this.props.shop_id).then((val) => {
       console.log(val);
@@ -47,7 +64,7 @@ export class ShopPage extends React.Component {
         </section>
         <div className="layout">
           <section>
-            <CategorySideMenu />
+            <CategorySideMenu filter={this.filterByCat} />
           </section>
           <section>
             <ItemGroup data={this.state.items} title="Items" />
