@@ -1,11 +1,24 @@
 .checkout-modal{
     width: 100%;
-    background-color: red;
+    padding-bottom: 16px;
     .right{
         float: right;
     }
-
     .left{
         float: left;
+    }
+    .shop-container {
+        margin-bottom: 16px;
+    }
+    .item-container {
+        margin-left: 16px;
+    }
+    .bill-summary {
+        margin: 16px 0;
+    }
+    .clear::after {
+        content: '';
+        display: block;
+        clear: both;
     }
 }

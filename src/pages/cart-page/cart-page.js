@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, InputNumber, Popconfirm, Button, Icon, Modal } from 'antd';
+import { Table, InputNumber, Popconfirm, Button, Icon, Modal, notification } from 'antd';
 import './cart-page.scss';
 import Axios from 'axios';
 import { CheckoutModal } from '../../components/layouts';
@@ -29,7 +29,24 @@ export class CartPage extends React.Component {
 
     checkOut = () => {
       console.log('chk out this cart ->', this.state.data);
-      this.setState({ modal_visible: false });
+      let items = this.state.data.map((item) => {
+        return {
+          item: item.key,
+          n: item.qty,
+          status: 'กำลังจัดส่ง'
+        }
+      });
+      let body = {
+        items: items
+      }
+      Axios.post('/order/create', body).then((res) => {
+        notification.success({
+          message: 'Success!!',
+          description: 'Your order was send to our shop. You can find your transaction detail by search bill id in "Track My Order" menu. Bill id: ' + res.data.id,
+          duration: 0
+        })
+        this.setState({ modal_visible: false });
+      });
     }
 
     openModal = () => {
@@ -127,7 +144,6 @@ export class CartPage extends React.Component {
       }];
       return (
         <div className="cart-page">
-
           <Modal
             title="Checkout"
             visible={this.state.modal_visible}
