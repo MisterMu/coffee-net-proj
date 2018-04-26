@@ -13,7 +13,9 @@ export class ItemModal extends React.Component {
             console.log(this.props.detail)
              return (
                 <div clssName='item-modal'>
+                <img src={this.props.detail.img_path} alt="item pic" />
                 <h3>{this.props.detail.name}</h3>
+                <div>{this.props.detail.desc}</div>
                 <p>{this.props.detail.price}</p>
                 </div>
             );

@@ -22,7 +22,8 @@ export class MainPage extends React.Component {
           id: item.id,
           name: item.nameEn,
           price: item.price + ' ฿',
-          img_path: item.image
+          img_path: item.image,
+          desc: item.desc
         }
       });
       this.setState({ top_item: tmp, ready: true });
@@ -33,7 +34,8 @@ export class MainPage extends React.Component {
           id: item.id,
           name: item.nameEn,
           price: item.price + ' ฿',
-          img_path: item.image
+          img_path: item.image,
+          desc: item.desc
         }
       });
       this.setState({ others_item: tmp, ready: true });
