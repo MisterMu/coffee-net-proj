@@ -6,26 +6,6 @@ import { MainMenu } from '../components';
 import { AdminRouter } from './admin-router';
 import Axios from 'axios';
 
-const navOrderPage = ({match}) => {
-  return <OrderPage order_id={match.params.id} />
-}
-
-const navShopPage = ({match}) => {
-  return <ShopPage shop_id={match.params.id} />
-}
-
-const chkSession = () => {
-  if (sessionStorage.isLogin === undefined && localStorage.isLogin === undefined) {
-    return <LoginPage />
-  } else {
-    return <Redirect to="/admin" />;
-  }
-}
-
-const redirect = () => (
-  <Redirect to="/" />
-);
-
 class OverlayVisible extends React.Component {
   state = {
     visible: false,
@@ -56,14 +36,14 @@ class OverlayVisible extends React.Component {
         <Menu.Item key="1"><Search placeholder="order number" onSearch={value => this.enterLoading(value)} enterButton=">" size="large" /></Menu.Item>
       </Menu>
     );
+
+    var id = this.state.data
    
-    if (this.state.nav) {
-      return (
-        <Redirect to={"/order/" + this.state.data} />
-      );
-      this.setState({ nav: false });
+    if (this.state.nav &&  this.state.data > 0) {
+      this.setState({ data: 0 });
+      return <Redirect to={"/order/" + id} />
     }
-    else{
+    else {
       return (
         <Dropdown overlay={menu}
           onVisibleChange={this.handleVisibleChange}
@@ -74,10 +54,29 @@ class OverlayVisible extends React.Component {
           </a>
         </Dropdown>
       );
-
     }
   }
 }
+
+const navOrderPage = ({match}) => {
+  return <OrderPage order_id={match.params.id} />
+}
+
+const navShopPage = ({match}) => {
+  return <ShopPage shop_id={match.params.id} />
+}
+
+const chkSession = () => {
+  if (sessionStorage.isLogin === undefined && localStorage.isLogin === undefined) {
+    return <LoginPage />
+  } else {
+    return <Redirect to="/admin" />;
+  }
+}
+
+const redirect = () => (
+  <Redirect to="/" />
+);
 
 const mainMenu = () => {
   if (window.location.pathname.slice(0, 6) !== '/admin') {
