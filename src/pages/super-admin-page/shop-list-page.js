@@ -23,7 +23,9 @@ export class ShopListPage extends React.Component {
             tmp.push({
               key: shop.id + '',
               name: shop.name,
-              revenue: '1000 ฿',
+              total_income: shop.totalIncome,
+              delivered: shop.percentageDelivered + '%',
+              status: (shop.approved)? 'Approved' : 'Pending',
               approved: shop.approved
             });
           }

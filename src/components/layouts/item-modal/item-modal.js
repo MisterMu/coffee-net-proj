@@ -5,11 +5,14 @@ export class ItemModal extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            desc: ''
         };
     }
 
     componentDidMount () {
-        console.log(this.props.detail)
+        let desc = '';
+        desc = this.props.detail.desc.replace(/(<br>|<ul>|<\/ul>|<ol>|<\/ol>|<li>|<\/li>|<p>|<\/p>)/g, ' ');
+        this.setState({ desc: desc });
     }
 
     render(){
@@ -21,7 +24,7 @@ export class ItemModal extends React.Component {
                     </div>
                     <h3>{this.props.detail.name}</h3>
                     <p>ราคา: {this.props.detail.price}</p>
-                    <p>รายละเอียดสินค้า: {this.props.detail.desc}</p>
+                    <p>รายละเอียดสินค้า: {this.state.desc}</p>
                     <p>สินค้าจากร้าน: {this.props.detail.shop_name}</p>
                     <p>ระยะเวลาจัดส่ง: 1-3 วัน</p>
                 </div>

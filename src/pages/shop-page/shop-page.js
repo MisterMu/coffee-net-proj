@@ -61,7 +61,7 @@ export class ShopPage extends React.Component {
       <div className="shop-page">
         <section>
           <div className="banner-img">
-            <img src={this.state.shop.banner} alt={this.state.shop.name + " banner"} />
+            <img src={this.state.shop.banner || require('../../assets/images/coffee_1.png')} alt={this.state.shop.name + " banner"} />
           </div>
         </section>
         <div className="layout">

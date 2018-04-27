@@ -17,11 +17,17 @@ export class OrderPage extends React.Component {
         Axios.get('/order/get/' + this.props.order_id).then((res) => {
             for (var shop in res.data[0].itemsByShop) {
                 var items = res.data[0].itemsByShop[shop]
-
+                let shop_name = items[0].shop_id;
+                if (items[0].shop_id == 1) {
+                    shop_name = 'Offical Shop';
+                } else if (items[0].shop_id == 2) {
+                    shop_name = 'Preda Roastinghouse';
+                } else if (items[0].shop_id == 3) {
+                    shop_name = 'Nespresso';
+                }
                 tmp.push({
-                    name: 'Sold by : ' + items[0].shop_id
+                    name: 'Sold by : ' + shop_name
                 })
-
                 for (var i = 0; i < items.length; i++){
                     tmp.push({
                         name: items[i].nameEn,
