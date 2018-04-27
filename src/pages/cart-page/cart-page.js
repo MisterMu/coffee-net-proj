@@ -77,6 +77,7 @@ export class CartPage extends React.Component {
     }
 
     componentDidMount () {
+      document.title = 'Cart';
       let cart = []
       let tmp = localStorage.getItem("cart");
       if (tmp && tmp.length !== 0) {

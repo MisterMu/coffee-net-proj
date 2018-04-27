@@ -37,6 +37,7 @@ export class OrderPage extends React.Component {
     }
 
     componentDidMount() {
+        document.title = 'Order'
         this.getBill()
     }
 

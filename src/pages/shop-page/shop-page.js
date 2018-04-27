@@ -51,6 +51,7 @@ export class ShopPage extends React.Component {
         logo: val.data[0].logo,
         banner: val.data[0].banner
       }
+      document.title = shop.name;
       this.setState({ items: tmp, shop: shop });
     });
   }

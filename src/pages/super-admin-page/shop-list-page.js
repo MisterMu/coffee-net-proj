@@ -68,6 +68,7 @@ export class ShopListPage extends React.Component {
   }
 
   componentDidMount () {
+    document.title = 'Admin'
     Axios.get('/shop/all').then((res) => {
       if (res.data) {
         console.log(res.data);
